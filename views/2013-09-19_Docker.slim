@@ -1,0 +1,104 @@
+ruby:
+  DOCKERFILE = %(
+  FROM ubuntu:precise
+  MAINTAINER tobias.schwab@dynport.de
+
+  RUN sed "s/main$/main universe/" -i /etc/apt/sources.list 
+  RUN apt-get update
+  RUN apt-get install redis-server
+  RUN mkdir -p /data/redis
+
+  ADD ./redis.conf /etc/redis.conf
+
+  EXPOSE 6379
+  CMD redis-server /etc/redis.conf)
+
+section
+  h1 Docker
+  p
+    small
+      a href="http://dynport.de" tobias.schwab@dynport.de
+      | /
+      a href="http://twitter.com/tobstarr" @tobstarr
+
+section
+  h2 Docker
+
+  ul
+    li.fragment REST API (written in go) on top of LXC
+    li.fragment
+      | manages
+      ul
+        li.fragment building, packaging and life cycle of containers
+        li.fragment network configuration
+        li.fragment distribution of images
+    li.fragment AUFS: copy on write file system
+    li.fragment open sourced by dotcloud in March 2013
+
+section
+  h2 LXC
+  ul
+    li.fragment OS level virtualization
+    li.fragment lightweight
+    li.fragment multiple network and process spaces on single host
+    li.fragment powers e.g. heroku dynamos
+    li.fragment basically "chroot on steroids"
+
+section
+  h2 Containers
+  ul
+    li.fragment lightweight: NOT full OS/VM
+    li.fragment perfect world: one process per container
+    li.fragment NO sshd
+    li.fragment NO direct FS access
+    li.fragment NO cron
+    li.fragment NO syslog
+    li.fragment NO monitoring
+    li.fragment created to be thrown away
+
+section
+  h2 Commands
+  table
+    tr
+      td.fragment create images
+      td.fragment docker build
+    tr
+      td.fragment tag images
+      td.fragment docker tag
+    tr
+      td.fragment distribute images
+      td.fragment docker push/pull
+    tr
+      td.fragment start containers
+      td.fragment docker run
+    tr
+      td.fragment stop containers
+      td.fragment docker kill
+    tr
+      td.fragment remove containers
+      td.fragment docker rm
+    tr
+      td.fragment remove images
+      td.fragment docker rmi
+
+section
+  h2 Dockerfile
+  ul
+    li.fragment scripting language to create images
+    li.fragment linear batch script
+    li.fragment caching
+  == format_code(DOCKERFILE)
+
+section
+  h2 DEMO
+
+section
+  ul
+    li
+      a href="http://www.docker.io" www.docker.io
+    li
+      a href="http://www.dynport.de" www.dynport.de
+    li
+      a href="http://github.com/dynport" github.com/dynport
+    li
+      a href="http://twitter.com/tobstarr" @tobstarr

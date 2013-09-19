@@ -1,0 +1,46 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    title Go for Rubyists
+    meta name="description" content="Go for Rubyists"
+    meta name="author" content="Tobias Schwab"
+    meta name="apple-mobile-web-app-capable" content="yes"
+    meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    link rel="stylesheet" href=asset_url("css/reveal.min.css")
+    link rel="stylesheet" href=asset_url("css/theme/default.css") id="theme"
+    link rel="stylesheet" href=asset_url("plugin/highlight/tomorrow-night-eighties.css")
+
+    javascript:
+      document.write( '<link rel="stylesheet" href=asset_url(%("/css/print/' + ( window.location.search.match( /print-pdf/gi ) ?  'pdf' : 'paper' ) + '.css")) type="text/css" media="print">' );
+
+  body
+    .reveal
+      .slides
+        == yield
+
+    script src=asset_url("lib/js/head.min.js")
+    script src=asset_url("js/reveal.min.js")
+    javascript:
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
